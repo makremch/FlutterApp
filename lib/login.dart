@@ -10,7 +10,8 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
 
-      body: InputEmailText()
+        resizeToAvoidBottomInset: false,
+        body: InputEmailText()
     );
   }
 }
@@ -29,125 +30,126 @@ class MyInputEmailTextState extends State<InputEmailText>{
   final double number = 2.0;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: "Welcome to Flutter",
-        home: SingleChildScrollView(
+    return SingleChildScrollView(
+
             child: new Material(
-            child: new Container (
-                padding: const EdgeInsets.all(30.0),
-                color: Colors.white10,
-                child: new Container(
-                  margin: new EdgeInsets.symmetric(vertical: 20.0),
-                  child: new Center(
-                      child: new Column(
-                          children : [
+                child: new Container (
+                    padding: const EdgeInsets.all(30.0),
+                    color: Colors.white10,
+                    child: new Container(
+                      margin: new EdgeInsets.symmetric(vertical: 20.0),
+                      child:
 
-                            new Image(image:  AssetImage('images/logo.png'),width: 1000, height: 80,),
+                      new Center(
+                          child: new Column(
+                              children : [
 
-                            new Padding(padding: EdgeInsets.only(top: 90.0)),
+                                new Image(image:  AssetImage('images/logo.png'),width: 1000, height: 80,),
 
-                            new TextFormField(
-                              onChanged: (str) {
-                                setState(() {
-                                  _emailIsEmpty =  (str.length == 0 ) ;
-                                  _emailIsValid = isEmail(str) ;
-                                });
-                              },
-                              decoration: new InputDecoration(
-                                prefixIcon: const Icon(
-                                  Icons.person,
-                                  color: Colors.blueGrey,
-                                ),
-                                suffixIcon: _emailIsEmpty ? null : (_emailIsValid ? const Icon(Icons.check,
-                                  color: Colors.green,) : const Icon(Icons.close,
-                                  color: Colors.red,)),
-                                labelText: "Enter Email",
-                                helperText: "",
-                                helperStyle: new TextStyle(color: Colors.white),
-                                fillColor: Colors.white,
-                                border: new OutlineInputBorder(
-                                  borderRadius: new BorderRadius.circular(25.0),
-                                  borderSide: new BorderSide(
-                                      color: Colors.red
+                                new Padding(padding: EdgeInsets.only(top: 90.0)),
+
+
+                                new TextFormField(
+                                  onChanged: (str) {
+                                    setState(() {
+                                      _emailIsEmpty =  (str.length == 0 ) ;
+                                      username = str;
+                                      _emailIsValid = isEmail(str) ;
+                                    });
+                                  },
+                                  decoration: new InputDecoration(
+                                    prefixIcon: const Icon(
+                                      Icons.person,
+                                      color: Colors.blueGrey,
+                                    ),
+                                    suffixIcon: _emailIsEmpty ? null : (_emailIsValid ? const Icon(Icons.check,
+                                      color: Colors.green,) : const Icon(Icons.close,
+                                      color: Colors.red,)),
+                                    labelText: "Enter Email",
+                                    helperText: "",
+                                    helperStyle: new TextStyle(color: Colors.white),
+                                    fillColor: Colors.white,
+                                    border: new OutlineInputBorder(
+                                      borderRadius: new BorderRadius.circular(25.0),
+                                      borderSide: new BorderSide(
+                                          color: Colors.red
+                                      ),
+                                    ),
+                                    //fillColor: Colors.green
+                                  ),
+                                  validator: (val) {
+                                    if(val.length==0) {
+                                      return "Email cannot be empty";
+                                    }else{
+                                      return null;
+                                    }
+                                  },
+                                  keyboardType: TextInputType.emailAddress,
+                                  style: new TextStyle(
+                                    fontFamily: "Poppins",
                                   ),
                                 ),
-                                //fillColor: Colors.green
-                              ),
-                              validator: (val) {
-                                if(val.length==0) {
-                                  return "Email cannot be empty";
-                                }else{
-                                  return null;
-                                }
-                              },
-                              keyboardType: TextInputType.emailAddress,
-                              style: new TextStyle(
-                                fontFamily: "Poppins",
-                              ),
-                            ),
 
-                            new TextFormField(
-                              onChanged: (String str){
+                                new TextFormField(
+                                  onChanged: (String str){
 
-                                pwd = str;
-                                },
-                              obscureText: true,
-                              decoration: new InputDecoration(
-                                prefixIcon: const Icon(
-                                  Icons.lock,
-                                  color: Colors.blueGrey,
-                                ),
-                                labelText: "Enter Password",
-                                fillColor: Colors.white,
-                                border: new OutlineInputBorder(
-                                  borderRadius: new BorderRadius.circular(25.0),
-                                  borderSide: new BorderSide(
+                                    pwd = str;
+                                  },
+                                  obscureText: true,
+                                  decoration: new InputDecoration(
+                                    prefixIcon: const Icon(
+                                      Icons.lock,
+                                      color: Colors.blueGrey,
+                                    ),
+                                    labelText: "Enter Password",
+                                    fillColor: Colors.white,
+                                    border: new OutlineInputBorder(
+                                      borderRadius: new BorderRadius.circular(25.0),
+                                      borderSide: new BorderSide(
+                                      ),
+                                    ),
+                                    //fillColor: Colors.green
+                                  ),
+                                  validator: (val) {
+                                    if(val.length==0) {
+                                      return "Email cannot be empty";
+                                    }else{
+                                      return null;
+                                    }
+                                  },
+                                  keyboardType: TextInputType.emailAddress,
+                                  style: new TextStyle(
+                                    fontFamily: "Poppins",
                                   ),
                                 ),
-                                //fillColor: Colors.green
-                              ),
-                              validator: (val) {
-                                if(val.length==0) {
-                                  return "Email cannot be empty";
-                                }else{
-                                  return null;
-                                }
-                              },
-                              keyboardType: TextInputType.visiblePassword,
-                              style: new TextStyle(
-                                fontFamily: "Poppins",
-                              ),
-                            ),
-                            new Padding(padding: EdgeInsets.only(top: 20.0)),
-                            ProgressButton(
-                              borderRadius: 20.0,
-                              defaultWidget: const Text('Login'),
-                              progressWidget: const CircularProgressIndicator(),
-                              width: 800,
-                              height: 40,
-                              color: Colors.blueAccent,
-                              onPressed: () async {
-                                int score = await Future.delayed(
-                                    const Duration(milliseconds: 3000), () => 42);
-                                return () {
-                                  doLogin(pwd, username);
-                                };
-                              },
-                            ),
-                          ]
-                      )
-                  ),
+                                new Padding(padding: EdgeInsets.only(top: 20.0)),
+                                ProgressButton(
+                                  borderRadius: 20.0,
+                                  defaultWidget: const Text('Login',style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 16),),
+                                  progressWidget: const CircularProgressIndicator(),
+                                  width: 800,
+                                  height: 40,
+                                  color: Colors.blueAccent,
+                                  onPressed: () async {
+                                    int score = await Future.delayed(
+                                        const Duration(milliseconds: 3000), () => 42);
+                                    return () {
+                                      doLogin(pwd, username);
+                                    };
+                                  },
+                                ),
+                              ]
+                          )
+                      ),
+                    )
                 )
             )
-        ))
     );
   }
 
   void doLogin(String pwd , String username) async{
 
-    username = "makrem.hamani@esprit.tn" ;
-    pwd = "SMICtest" ;
+    print(pwd+"|"+username);
     String url = 'http://siniway.com/Stage/connexion.php';
     var map = new Map<String, dynamic>();
     map['username'] = username;
@@ -187,7 +189,7 @@ class MyInputEmailTextState extends State<InputEmailText>{
             }
         );
       } else {
-       Navigator.of(context)
+        Navigator.of(context)
             .push(MaterialPageRoute<Null>(builder: (BuildContext context) {
           return ListeArticles(res["produits"]);
         }));
@@ -215,5 +217,3 @@ class MyInputEmailTextState extends State<InputEmailText>{
   }
 
 }
-
-
